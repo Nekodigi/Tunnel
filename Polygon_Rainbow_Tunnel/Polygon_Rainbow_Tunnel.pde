@@ -1,14 +1,16 @@
 float dtheta;//delta theta
-float dr = 100;//distance between ring
+float dr = 100;//distance between ring 500
 int n = 5;//n polygon
-int nd = 20;//n depth
+int nd = 30;//n depth
 float r;
 ArrayList<Polygon> polygons = new ArrayList<Polygon>();
 
 void setup(){
   size(500, 500, P3D);
+  //fullScreen(P3D);
   colorMode(HSB, 360, 100, 100, 100);
-  r=width;
+  hint(DISABLE_DEPTH_TEST);//show hidden face
+  r=width/1.1;
   stroke(360, 30);
   //noStroke();
 }
@@ -28,7 +30,8 @@ void draw(){
       temp.get(j).add(new PVector(0, 0, -dr*i));
       tempNext.get(j).add(new PVector(0, 0, -dr*(i+1)));
     }
-    color col = color(map(i, 0, nd, 0, 360), 60, 100);
+    color col = color(map(i, 0, nd, 0, 360), 60, 100, 20);//use with DISABLE_DEPTH_TEST
+    //color col = color(map(i, 0, nd, 0, 360), 60, 100, 100);
     for(int j=0; j<temp.size(); j++){
       Polygon polygon = new Polygon(col);
       polygon.vertices.add(temp.get(j));
